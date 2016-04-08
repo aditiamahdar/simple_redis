@@ -11,13 +11,13 @@ Gem::Specification.new do |s|
   s.email       = ["adit.mahdar@gmail.com"]
   s.homepage    = "https://github.com/aditiamahdar/redis_cache"
   s.summary     = "Use Redis cache just like you use Rails cache"
-  s.description = "Wrapper Gem for redis-rails to make us easy operate cache with Redis"
+  s.description = "Wrapper Gem for redis to make us easy operate cache with Redis"
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "redis-rails"
+  s.add_dependency "redis"
 
   s.add_development_dependency "rails", "~> 4.2.3"
   s.add_development_dependency "sqlite3"
