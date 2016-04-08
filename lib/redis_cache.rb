@@ -29,6 +29,12 @@ module RedisCache
     end
   end
 
+  # def self.set
+  # end
+
+  # def self.get
+  # end
+
   # def self.delete_matched(key)
     # eval "for _,k in ipairs(redis.call('keys','session:*')) do redis.call('del',k) end" 0
     # redis-cli KEYS "prefix:*" | tr "\n" "\0" | xargs -0 redis-cli DEL
