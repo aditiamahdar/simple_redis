@@ -36,7 +36,7 @@ SimpleRedis.fetch(key: 'department-list') do
 end
 ```
 
-As default we will cache data under `redis-cache` collection/database, but if you need to define it yourself, simply use `db` parameter, see the example
+As default we will cache data under `simple-redis-cache` collection/database, but if you need to define it yourself, simply use `db` parameter, see the example
 
 ```ruby
 SimpleRedis.fetch(db: 'important-db', key: 'department-list') do
@@ -52,7 +52,7 @@ Create `simple_redis.rb` in `config/initializers` folder
 SimpleRedis.configuration do |config|
   config.host = "redis_host" # Default 'localhost'
   config.port = "redis_port" # Default 6379
-  config.default_db = "redis_db_name" # Default 'redis-cache'
+  config.default_db = "redis_db_name" # Default 'simple-redis-cache'
 end
 ```
 

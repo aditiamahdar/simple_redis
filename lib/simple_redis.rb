@@ -13,7 +13,7 @@ module SimpleRedis
 
   # Set or Get cache from Redis, opts => db, key, value, block
   def self.fetch(opts={})
-    redis = Redis.new(host: host || 'localhost', port: port || 6379, db: opts[:db] || default_db || 'redis-cache')
+    redis = Redis.new(host: host || 'localhost', port: port || 6379, db: opts[:db] || default_db || 'simple-redis-cache')
     result = redis.get opts[:key]
     result = self.cache(redis, opts, block_given? ? yield.inspect : nil) if result.nil?
     begin eval result rescue result end
