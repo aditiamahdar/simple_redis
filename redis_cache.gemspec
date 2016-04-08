@@ -1,16 +1,16 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
-require "redis_cache/version"
+require "simple_redis/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "redis_cache"
-  s.version     = RedisCache::VERSION
+  s.name        = "simple_redis"
+  s.version     = SimpleRedis::VERSION
   s.authors     = ["Aditia Mahdar"]
   s.email       = ["adit.mahdar@gmail.com"]
-  s.homepage    = "https://github.com/aditiamahdar/redis_cache"
-  s.summary     = "Use Redis cache just like you use Rails cache"
+  s.homepage    = "https://github.com/aditiamahdar/simple_redis"
+  s.summary     = "Use Simple Redis just like you use Rails cache"
   s.description = "Wrapper Gem for redis to make us easy operate cache with Redis"
   s.license     = "MIT"
 

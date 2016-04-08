@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    redis_cache (0.0.1)
+    simple_redis (0.0.1)
       redis
 
 GEM
@@ -108,7 +108,7 @@ PLATFORMS
 
 DEPENDENCIES
   rails (~> 4.2.3)
-  redis_cache!
+  simple_redis!
   sqlite3
 
 BUNDLED WITH

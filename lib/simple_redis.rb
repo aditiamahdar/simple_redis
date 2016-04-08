@@ -1,6 +1,6 @@
 require "redis"
 
-module RedisCache
+module SimpleRedis
   class << self
     attr_accessor :host
     attr_accessor :port
