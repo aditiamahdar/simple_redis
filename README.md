@@ -44,6 +44,18 @@ RedisCache.fetch(db: 'important-db', key: 'department-list') do
 end
 ```
 
+## Configuration
+
+Create `redis_cache.rb` in `config/initializers` folder
+
+```ruby
+RedisCache.configuration do |config|
+  config.host = "redis_host" # Default 'localhost'
+  config.port = "redis_port" # Default 6379
+  config.default_db = "redis_db_name" # Default 'redis-cache'
+end
+```
+
 ## Development
 
 ## Contributing

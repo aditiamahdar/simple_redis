@@ -1,10 +1,19 @@
 require "redis"
 
 module RedisCache
+  class << self
+    attr_accessor :host
+    attr_accessor :port
+    attr_accessor :default_db
+  end
+
+  def self.configuration(&block)
+    yield self
+  end
+
   # Set or Get cache from Redis, opts => db, key, value, block
   def self.fetch(opts={})
-    host, port, db = 'localhost', 6379, 'redis-cache'
-    redis = Redis.new(host: host, port: port, db: opts[:db] || db)
+    redis = Redis.new(host: host || 'localhost', port: port || 6379, db: opts[:db] || default_db || 'redis-cache')
     result = redis.get opts[:key]
     result = self.cache(redis, opts, block_given? ? yield.inspect : nil) if result.nil?
     begin eval result rescue result end
