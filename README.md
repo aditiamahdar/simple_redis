@@ -52,7 +52,7 @@ You can simply just set value to a key, with this:
 SimpleRedis.set('department-list', departments)
 ```
 
-### set
+### get
 Or you can just get value of a key with this
 
 ```ruby
