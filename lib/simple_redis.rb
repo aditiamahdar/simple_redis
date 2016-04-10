@@ -7,7 +7,7 @@ module SimpleRedis
     attr_accessor :default_db
   end
 
-  def self.configuration(&block)
+  def self.configuration
     yield self
   end
 
@@ -31,10 +31,11 @@ module SimpleRedis
     get_result(result)
   end
 
-  # def self.delete_matched(key)
-    # eval "for _,k in ipairs(redis.call('keys','session:*')) do redis.call('del',k) end" 0
+  def self.delete_matched(key)
+    # `eval "for _,k in ipairs(redis.call('keys','#{key}')) do echo k end" 0`
+    # `eval "for _,k in ipairs(redis.call('keys','#{key}')) do redis.call('del',k) end" 0`
     # redis-cli KEYS "prefix:*" | tr "\n" "\0" | xargs -0 redis-cli DEL
-  # end
+  end
 
   private
     def self.cache(redis, key, value)

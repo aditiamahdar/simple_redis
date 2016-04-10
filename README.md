@@ -67,7 +67,7 @@ Create `simple_redis.rb` in `config/initializers` folder
 SimpleRedis.configuration do |config|
   config.host = "redis_host" # Default 'localhost'
   config.port = "redis_port" # Default 6379
-  config.default_db = "redis_db_name" # Default 'simple-redis-cache'
+  config.default_db = "redis_db" # Default '0'
 end
 ```
 
