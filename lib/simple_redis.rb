@@ -43,7 +43,7 @@ module SimpleRedis
     end
 
     def self.get_redis(opts)
-      Redis.new(host: host || 'localhost', port: port || 6379, db: opts[:db] || default_db || 'simple-redis-cache')
+      Redis.new(host: host || HOST, port: port || PORT, db: opts[:db] || default_db || DEFAULT_DB)
     end
 
     def self.get_result(redis_result)
