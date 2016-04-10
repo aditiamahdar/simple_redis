@@ -59,6 +59,19 @@ Or you can just get value of a key with this
 SimpleRedis.get('department-list')
 ```
 
+### delete_matched
+This method remove a data based on key such as:
+
+```ruby
+SimpleRedis.delete_matched('department/fashion')
+```
+
+OR you can use regex
+
+```ruby
+SimpleRedis.delete_matched('department/*')
+```
+
 ## Configuration
 
 Create `simple_redis.rb` in `config/initializers` folder
