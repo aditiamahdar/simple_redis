@@ -5,6 +5,8 @@ module SimpleRedis
     attr_accessor :host
     attr_accessor :port
     attr_accessor :default_db
+    attr_accessor :current_opts
+    attr_accessor :current_redis
   end
 
   def self.configuration
@@ -21,7 +23,7 @@ module SimpleRedis
 
   def self.set(key, value, opts={})
     redis = get_redis(opts)
-    result = cache redis, key, value.inspect
+    result = cache(redis, key, value.inspect)
     get_result(result)
   end
 
@@ -31,24 +33,36 @@ module SimpleRedis
     get_result(result)
   end
 
-  def self.delete_matched(key)
-    # `eval "for _,k in ipairs(redis.call('keys','#{key}')) do echo k end" 0`
-    # `eval "for _,k in ipairs(redis.call('keys','#{key}')) do redis.call('del',k) end" 0`
-    # redis-cli KEYS "prefix:*" | tr "\n" "\0" | xargs -0 redis-cli DEL
+  def self.total_matches(key, opts={})
+    redis = get_redis(opts)
+    redis.keys(key).size
   end
 
-  private
+  def self.delete_matched(key, opts={})
+    redis = get_redis(opts)
+    redis.del(*redis.keys(key)) rescue 0
+  end
+
+  # PRIVATE METHODS
     def self.cache(redis, key, value)
+      puts key
+      puts value
       redis.set key, value
       value
-    end
-
-    def self.get_redis(opts)
-      Redis.new(host: host || HOST, port: port || PORT, db: opts[:db] || default_db || DEFAULT_DB)
     end
 
     def self.get_result(redis_result)
       begin eval redis_result rescue redis_result end
     end
+
+    def self.get_redis(opts={})
+      if current_opts.eql? opts
+        self.current_redis
+      else
+        self.current_opts = opts
+        self.current_redis = Redis.new(host: host || HOST, port: port || PORT, db: opts[:db] || default_db || DEFAULT_DB)
+      end
+    end
+    private_class_method :cache, :get_result, :get_redis
 
 end
