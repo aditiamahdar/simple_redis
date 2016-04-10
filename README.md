@@ -22,6 +22,7 @@ Or install it yourself as:
 
 ## Usage
 
+### fetch
 You can use key and value parameter to cache the data
 
 ```ruby
@@ -42,6 +43,20 @@ As default we will cache data under `simple-redis-cache` collection/database, bu
 SimpleRedis.fetch(db: 'important-db', key: 'department-list') do
   Department.all
 end
+```
+
+### set
+You can simply just set value to a key, with this:
+
+```ruby
+SimpleRedis.set('department-list', departments)
+```
+
+### set
+Or you can just get value of a key with this
+
+```ruby
+SimpleRedis.get('department-list')
 ```
 
 ## Configuration
