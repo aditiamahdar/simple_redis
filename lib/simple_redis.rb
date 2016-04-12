@@ -45,8 +45,6 @@ module SimpleRedis
 
   # PRIVATE METHODS
     def self.cache(redis, key, value)
-      puts key
-      puts value
       redis.set key, value
       value
     end
