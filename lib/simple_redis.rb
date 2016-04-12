@@ -13,12 +13,10 @@ module SimpleRedis
     yield self
   end
 
-  # Set or Get cache from Redis, opts => db, key, value, block
   def self.fetch(opts={})
     redis = get_redis(opts)
     result = redis.get opts[:key]
-    result = cache(redis, opts[:key], block_given? ? yield.inspect : opts[:value].inspect) if result.nil?
-    get_result(result)
+    get_result(result || cache(redis, opts[:key], block_given? ? yield.inspect : opts[:value].inspect))
   end
 
   def self.set(key, value, opts={})
@@ -54,12 +52,12 @@ module SimpleRedis
     end
 
     def self.get_redis(opts={})
-      if current_opts.eql? opts
-        self.current_redis
-      else
-        self.current_opts = opts
-        self.current_redis = Redis.new(host: get_host(opts), port: get_port(opts), db: get_db(opts))
-      end
+      current_opts.eql?(opts) ? current_redis : new_redis(opts)
+    end
+
+    def self.new_redis(opts={})
+      current_opts = opts
+      current_redis = Redis.new(host: get_host(opts), port: get_port(opts), db: get_db(opts))
     end
 
     def self.get_host(opts={})
@@ -73,6 +71,6 @@ module SimpleRedis
     def self.get_db(opts={})
       opts[:db] || default_db || DEFAULT_DB
     end
-    private_class_method :cache, :get_result, :get_redis, :get_host, :get_port, :get_db
+    private_class_method :cache, :get_result, :get_redis, :new_redis, :get_host, :get_port, :get_db
 
 end
