@@ -26,7 +26,7 @@ Or install it yourself as:
 You can use key and value parameter to cache the data
 
 ```ruby
-SimpleRedis.fetch(key: 'department-list', value: departments)
+SimpleRedis.fetch(key: 'department-list', value: Department.all)
 ```
 
 OR You can use key and block to cache it
@@ -49,7 +49,7 @@ end
 You can simply just set value to a key, with this:
 
 ```ruby
-SimpleRedis.set('department-list', departments)
+SimpleRedis.set('department-list', Department.all)
 ```
 
 ### get
@@ -81,6 +81,14 @@ SimpleRedis.configuration do |config|
   config.host = "redis_host" # Default 'localhost'
   config.port = "redis_port" # Default 6379
   config.default_db = "redis_db" # Default '0'
+end
+```
+
+And you can change those 3 configurations in the fly when using the method, example:
+
+```ruby
+SimpleRedis.fetch(db: 'important-db', key: 'department-list', host: 'redis_host', port: 'redis_port') do
+  Department.all
 end
 ```
 
