@@ -58,9 +58,21 @@ module SimpleRedis
         self.current_redis
       else
         self.current_opts = opts
-        self.current_redis = Redis.new(host: host || HOST, port: port || PORT, db: opts[:db] || default_db || DEFAULT_DB)
+        self.current_redis = Redis.new(host: get_host(opts), port: get_port(opts), db: get_db(opts))
       end
     end
-    private_class_method :cache, :get_result, :get_redis
+
+    def self.get_host(opts={})
+      opts[:host] || host || HOST
+    end
+
+    def self.get_port(opts={})
+      opts[:port] || port || PORT
+    end
+
+    def self.get_db(opts={})
+      opts[:db] || default_db || DEFAULT_DB
+    end
+    private_class_method :cache, :get_result, :get_redis, :get_host, :get_port, :get_db
 
 end
