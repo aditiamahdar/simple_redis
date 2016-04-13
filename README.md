@@ -28,6 +28,7 @@ You can use key and value parameter to cache the data
 ```ruby
 SimpleRedis.fetch(key: 'department-list', value: Department.all)
 ```
+_Please note every cached object will be converted to json format using `to_json`_
 
 OR You can use key and block to cache it
 
@@ -84,7 +85,7 @@ SimpleRedis.configuration do |config|
 end
 ```
 
-And you can change those 3 configurations in the fly when using the method, example:
+And you can change those 3 configurations on the fly, example:
 
 ```ruby
 SimpleRedis.fetch(db: 'important-db', key: 'department-list', host: 'redis_host', port: 'redis_port') do
