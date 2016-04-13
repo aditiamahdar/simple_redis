@@ -20,7 +20,7 @@ Or install it yourself as:
 
     $ gem install simple_redis
 
-_Please use stable version 0.3.0_
+_**Please use stable version 0.3.0**_
 
 ## Usage
 
@@ -30,7 +30,7 @@ You can use key and value parameter to cache the data
 ```ruby
 SimpleRedis.fetch(key: 'department-list', value: Department.all)
 ```
-_Please note every cached object will be converted to json format using `to_json`_
+_**Please note every cached object will be converted to json format using `to_json`**_
 
 OR You can use key and block to cache it
 
