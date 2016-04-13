@@ -9,7 +9,7 @@ Use Simple Redis just like you use Rails cache
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'simple_redis'
+gem 'simple_redis', '~> 0.3.0'
 ```
 
 And then execute:
@@ -19,6 +19,8 @@ And then execute:
 Or install it yourself as:
 
     $ gem install simple_redis
+
+_Please use stable version 0.3.0_
 
 ## Usage
 

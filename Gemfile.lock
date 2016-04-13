@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    simple_redis (0.2.0)
+    simple_redis (0.3.0)
       redis
 
 GEM
