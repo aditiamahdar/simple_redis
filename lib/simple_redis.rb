@@ -16,12 +16,12 @@ module SimpleRedis
   def self.fetch(opts={})
     redis = get_redis(opts)
     result = redis.get opts[:key]
-    get_result(result || cache(redis, opts[:key], block_given? ? yield.inspect : opts[:value].inspect))
+    get_result(result || cache(redis, opts[:key], block_given? ? yield : opts[:value]))
   end
 
   def self.set(key, value, opts={})
     redis = get_redis(opts)
-    result = cache(redis, key, value.inspect)
+    result = cache(redis, key, value)
     get_result(result)
   end
 
@@ -43,12 +43,16 @@ module SimpleRedis
 
   # PRIVATE METHODS
     def self.cache(redis, key, value)
-      redis.set key, value
+      redis.set key, normalize(value)
       value
     end
 
+    def self.normalize(value)
+      value.class.in?(NORMAL_DATA_TYPES) ? value : value.to_json
+    end
+
     def self.get_result(redis_result)
-      begin eval redis_result rescue redis_result end
+      begin eval(redis_result) rescue redis_result end
     end
 
     def self.get_redis(opts={})
@@ -71,6 +75,7 @@ module SimpleRedis
     def self.get_db(opts={})
       opts[:db] || default_db || DEFAULT_DB
     end
-    private_class_method :cache, :get_result, :get_redis, :new_redis, :get_host, :get_port, :get_db
+    private_class_method :cache, :normalize, :get_result, :get_redis, :new_redis,
+      :get_host, :get_port, :get_db
 
 end
