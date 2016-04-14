@@ -29,6 +29,7 @@ You can use key and value parameter to cache the data
 
 ```ruby
 SimpleRedis.fetch(key: 'department-list', value: Department.all)
+# => [{name: 'Car'}, {name: 'Fashion'}, {name: 'Gadget'}]
 ```
 _**Please note every cached object will be converted to json format using `to_json`**_
 
@@ -38,6 +39,7 @@ OR You can use key and block to cache it
 SimpleRedis.fetch(key: 'department-list') do
   Department.all
 end
+# => [{name: 'Car'}, {name: 'Fashion'}, {name: 'Gadget'}]
 ```
 
 As default we will cache data under `simple-redis-cache` collection/database, but if you need to define it yourself, simply use `db` parameter, see the example
@@ -46,6 +48,7 @@ As default we will cache data under `simple-redis-cache` collection/database, bu
 SimpleRedis.fetch(db: 'important-db', key: 'department-list') do
   Department.all
 end
+# => [{name: 'Car'}, {name: 'Fashion'}, {name: 'Gadget'}]
 ```
 
 ### set
@@ -53,6 +56,7 @@ You can simply just set value to a key, with this:
 
 ```ruby
 SimpleRedis.set('department-list', Department.all)
+# => [{name: 'Car'}, {name: 'Fashion'}, {name: 'Gadget'}]
 ```
 
 ### get
@@ -60,6 +64,7 @@ Or you can just get value of a key with this
 
 ```ruby
 SimpleRedis.get('department-list')
+# => [{name: 'Car'}, {name: 'Fashion'}, {name: 'Gadget'}]
 ```
 
 ### total_matches
@@ -67,6 +72,7 @@ Total matches used to see how many key matched with our keyword, e.g:
 
 ```ruby
 SimpleRedis.total_matches('department/*')
+# => 3
 ```
 
 ### delete_matched
@@ -74,12 +80,14 @@ This method remove a data based on key such as:
 
 ```ruby
 SimpleRedis.delete_matched('department/fashion')
+# => 1
 ```
 
 OR you can use regex
 
 ```ruby
 SimpleRedis.delete_matched('department/*')
+# => 3
 ```
 
 ## Configuration
@@ -100,6 +108,7 @@ And you can change those 3 configurations on the fly, example:
 SimpleRedis.fetch(db: 'important-db', key: 'department-list', host: 'redis_host', port: 'redis_port') do
   Department.all
 end
+# => [{name: 'Car'}, {name: 'Fashion'}, {name: 'Gadget'}]
 ```
 
 ## Development
