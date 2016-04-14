@@ -62,6 +62,13 @@ Or you can just get value of a key with this
 SimpleRedis.get('department-list')
 ```
 
+### total_matches
+Total matches used to see how many key matched with our keyword, e.g:
+
+```ruby
+SimpleRedis.total_matches('department/*')
+```
+
 ### delete_matched
 This method remove a data based on key such as:
 
