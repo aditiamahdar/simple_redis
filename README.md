@@ -20,8 +20,6 @@ Or install it yourself as:
 
     $ gem install simple_redis
 
-_**Please use stable version 0.3.0**_
-
 ## Usage
 
 ### fetch
